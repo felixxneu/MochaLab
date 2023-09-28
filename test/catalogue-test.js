@@ -97,4 +97,21 @@ describe("Catalogue", () => {
       expect(rejectedProduct).to.be.undefined; 
     });
   });
+
+  describe("searchByCreteria", () => {
+    beforeEach(function () {
+      batch = {
+        type: 'Batch',
+        products: [
+          new Product("A126", "Product 6", 100, 10, 11.0),
+          new Product("A127", "Product 7", 100, 10, 9.0),
+        ],
+      };
+    });
+    it("should search for prices and return an array of the results", () => {
+      let resultArray = cat.search({ price: 10.00});
+      expect(resultArray).to.have.lengthOf(1);
+      expect(resultArray).to.have.members(["A127"]);
+    });
+  });
 });
