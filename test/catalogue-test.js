@@ -111,5 +111,9 @@ describe("Catalogue", () => {
       expect(resultArray).to.have.lengthOf(2);
       expect(resultArray).to.have.members(["A126", "A127"]);
     });
+
+    it('should throw an error if no criteria is provided', () => {
+      expect(() => catalogue.search({})).to.throw('Bad search');
+    });
   });
 });
