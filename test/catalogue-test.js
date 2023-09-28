@@ -113,7 +113,7 @@ describe("Catalogue", () => {
     });
 
     it('should throw an error if no criteria is provided', () => {
-      expect(() => catalogue.search({})).to.throw('Bad search');
+      expect(() => cat.search({})).to.throw('Bad search');
     });
   });
 });

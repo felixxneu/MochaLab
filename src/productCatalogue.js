@@ -52,6 +52,10 @@ class Catalogue {
     return noProductsAdded;
 }
 search(criteria) {
+  if (!criteria.price && !criteria.keyword) {
+    throw new Error('Bad search');
+  }
+  
   if (criteria.price) {
     const price = criteria.price;
     return this.products.filter(product => product.price <= price).map((p) => p.id);
