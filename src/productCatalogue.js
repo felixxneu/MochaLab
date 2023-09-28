@@ -52,8 +52,15 @@ class Catalogue {
     return noProductsAdded;
 }
 search(criteria) {
-  //TODO
-  return Array;
+  if (criteria.price) {
+    const price = criteria.price;
+    return this.products.filter(product => product.price <= price).map((p) => p.id);
+  }
+
+  if (criteria.keyword) {
+    const keyword = criteria.keyword.toLowerCase();
+    return this.products.filter(product => product.name.toLowerCase().includes(keyword)).map((p) => p.id);
+  }
 }
 }
 module.exports = Catalogue;

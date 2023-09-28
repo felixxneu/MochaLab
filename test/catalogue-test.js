@@ -94,24 +94,22 @@ describe("Catalogue", () => {
       expect(() => cat.batchAddProducts(batch)).to.throw("Bad Batch");
       // Target state
       let rejectedProduct = cat.findProductById("A126");
-      expect(rejectedProduct).to.be.undefined; 
+      expect(rejectedProduct).to.be.undefined;
     });
   });
 
   describe("searchByCreteria", () => {
-    beforeEach(function () {
-      batch = {
-        type: 'Batch',
-        products: [
-          new Product("A126", "Product 6", 100, 10, 11.0),
-          new Product("A127", "Product 7", 100, 10, 9.0),
-        ],
-      };
-    });
-    it("should search for prices and return an array of the results", () => {
-      let resultArray = cat.search({ price: 10.00});
-      expect(resultArray).to.have.lengthOf(1);
-      expect(resultArray).to.have.members(["A127"]);
+    it("should search for prices and words return an array of the results", () => {
+      cat.addProduct(new Product("A126", "shoe", 100, 10, 11.0));
+      cat.addProduct(new Product("A127", "glasshouse", 100, 10, 9.0));
+      cat.addProduct(new Product("A128", "mask", 100, 10, 10.0));
+
+      let resultArray = cat.search({ price: 10.00 });
+      expect(resultArray).to.have.lengthOf(4);
+      expect(resultArray).to.have.members(['A123', 'A125', 'A127', 'A128' ]);
+      resultArray = cat.search({ keyword: 'sho' });
+      expect(resultArray).to.have.lengthOf(2);
+      expect(resultArray).to.have.members(["A126", "A127"]);
     });
   });
 });
